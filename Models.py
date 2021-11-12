@@ -76,7 +76,7 @@ def CNN_model_2( n_pix, n_out):
     model.add(Dense(128, activation='sigmoid'))
     model.add(Dense(n_out, activation='sigmoid'))
     # Compile model
-    opt = keras.optimizers.SGD(learning_rate=0.01, momentum=0.5)
+    opt = keras.optimizers.Adam()
     model.compile(loss='MAE', optimizer=opt)
 
     return model

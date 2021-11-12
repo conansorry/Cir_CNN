@@ -29,13 +29,13 @@ Y_Nor[:,0] = Y_Buff[:,0]/L_Max
 Y_Nor[:,1] = Y_Buff[:,1]/C_Max
 
 
-X_train, X_test, Y_train, Y_test = train_test_split(X_Buff, Y_Buff, test_size=0.33, random_state=42)
+X_train, X_test, Y_train, Y_test = train_test_split(X_Buff, Y_Buff, test_size=0.2, random_state=422)
 
 
 model = Models.CNN_model_2(num_pixels, n_out)
 plot_model( model, "CNN_2.png", show_shapes=True )
 
-model.fit(X_train, Y_train, validation_data=(X_test, Y_test), epochs=10, batch_size=10, verbose=2)
+model.fit(X_train, Y_train, validation_data=(X_test, Y_test), epochs=10, batch_size=50, verbose=2)
 
 scores = model.evaluate(X_test, Y_test, verbose=0)
 
