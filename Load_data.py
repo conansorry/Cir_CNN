@@ -1,5 +1,6 @@
 import numpy as np
 import Gloable_Var as Var
+import math
 
 N_pack = Var.N_pack
 def mini_Input(X_Buff):
