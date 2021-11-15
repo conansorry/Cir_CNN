@@ -1,4 +1,6 @@
 import numpy as np
+
+import Gloable_Var
 import Gloable_Var as Var
 import math
 
@@ -20,8 +22,11 @@ def modi_Y(Y_Buff):
     Y_test = np.zeros((Y_Buff.shape[0], 1))
     for i in range(Y_test.shape[0]):
         Y_test[i] = math.sqrt(Y_Buff[i,0]*Y_Buff[i,1])
+    n_output = 1
+    return Y_test, n_output
 
-    return Y_test, 1
+
+
 def load_data_with_array(index_Array):
     Max = int((index_Array[-1]) / N_pack)
     print(index_Array[-1], N_pack)
@@ -34,7 +39,7 @@ def load_data_with_array(index_Array):
             Buff_LC = np.loadtxt(load_y_p + lc_nm)
         else:
             Buff_LC = np.append(Buff_LC, np.loadtxt(load_y_p + lc_nm), axis=0)
-        print(np.shape(Buff_LC))
+        # print(np.shape(Buff_LC))
 
     load_x_p = Var.data_p + "Mat\\"
 
@@ -42,6 +47,7 @@ def load_data_with_array(index_Array):
     print(x.size)
     y = np.array([])
     for i in range(len(index_Array)):
+        if(i%Gloable_Var.N_pack == 0 ): print(i/Gloable_Var.N_pack)
         x_nm = "Mat_" + str(index_Array[i]) + ".txt"
         if (np.size(x) == 0):
             x = [np.loadtxt(load_x_p + x_nm, delimiter=',')]
@@ -53,7 +59,7 @@ def load_data_with_array(index_Array):
         else:
             y = np.append(y, [Buff_LC[index_Array[i], 1:3]], axis=0)
 
-    print(np.shape(y))
+
     return x, y
 
 def up_Sampling_Data(X_in):
