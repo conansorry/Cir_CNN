@@ -37,4 +37,46 @@ def load_data_with_array(index_Array):
     print(np.shape(y))
     return x, y
 
+def up_Sampling_Data(X_in):
+    X_return = np.zeros((X_in.shape[0], X_in.shape[1]*2, X_in.shape[2]*2))
+
+    for i in range(X_in.shape[0]):
+        X_return[i] = Up_Sampling_Mat(X_in[i,:,:])
+
+    return X_return
+
+def Up_Sampling_Mat(X_mat):
+    n_pix = X_mat.shape[1]
+    _n = int(n_pix/2)
+    X_return = np.zeros((2*n_pix, 2*n_pix))
+
+    for i in range(_n):
+        for j in range(_n):
+
+            if (X_mat[i, j] == 0):
+                X_return[2*i:2*(i+1), 2*j:2*(j+1)] = 1.0
+
+            elif(X_mat[i, j] == 0.5):
+                if (i != 0 and j != _n):
+                    if (X_mat[i - 1, j] == 0 and X_mat[i, j + 1] == 0):
+                        X_return[2*i, 2*j] = 1.0
+                if (i != _n and j != _n):
+                    if (X_mat[i, j + 1] == 0 and X_mat[i + 1, j] == 0):
+                        X_return[2*i, 2*j+1] = 1.0
+                if (i != _n and j != 0):
+                    if (X_mat[i + 1, j] == 0 and X_mat[i, j - 1] == 0):
+                        X_return[2*i+1, 2*j] = 1.0
+                if (i != 0 and j != 0):
+                    if (X_mat[i, j - 1] == 0 and X_mat[i - 1, j] == 0):
+                        X_return[2*i+1, 2*j+1] = 1.0
+
+    for i in range(2 * _n):
+        for j in range( 2 * _n):
+            X_return[2 * n_pix - i - 1, j] = X_return[i, j]
+            X_return[i, 2 * n_pix -j- 1] = X_return[i, j]
+            X_return[2 * n_pix - i- 1, 2 * n_pix -j- 1] = X_return[i, j]
+    return X_return
+
+
+
 

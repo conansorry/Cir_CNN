@@ -10,5 +10,5 @@ import Models
 import Test_Pool
 
 
-Test_Pool.CNN_Model()
+Test_Pool.baseline_model()
 
