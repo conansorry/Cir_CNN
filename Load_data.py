@@ -9,18 +9,16 @@ def load_data_with_array(index_Array):
     load_y_p = Var.data_p + "LC_fit\\"
     Buff_LC = np.array([])
     for i in range(Max + 1):
-        print(i)
         lc_nm = "LC_P" + str(i) + ".txt"
         if (Buff_LC.size == 0):
             Buff_LC = np.loadtxt(load_y_p + lc_nm)
         else:
             Buff_LC = np.append(Buff_LC, np.loadtxt(load_y_p + lc_nm), axis=0)
-        print(np.shape(Buff_LC))
-
+        print(i, "in", Max )
+    print("finish loading LC cir")
     load_x_p = Var.data_p + "Mat\\"
 
     x = np.array([])
-    print(x.size)
     y = np.array([])
     for i in range(len(index_Array)):
         x_nm = "Mat_" + str(index_Array[i]) + ".txt"
@@ -33,8 +31,10 @@ def load_data_with_array(index_Array):
             y = [Buff_LC[index_Array[i], 1:3]]
         else:
             y = np.append(y, [Buff_LC[index_Array[i], 1:3]], axis=0)
+        if(i%N_pack == 0):
+            print(i, "in", range(len(index_Array)))
+    print("print finish loading X")
 
-    print(np.shape(y))
     return x, y
 
 

@@ -27,7 +27,7 @@ def baseline_model():
     Y_Nor = np.zeros(np.shape(Y_Buff))
     Y_Nor[:,0] = Y_Buff[:,0]/L_Max
     Y_Nor[:,1] = Y_Buff[:,1]/C_Max
-
+    num_pixels = X_Buff.shape[1] * X_Buff.shape[2]
     X_Buff = X_Buff.reshape((X_Buff.shape[0], num_pixels)).astype('float32')
 
     # print( statistics.mean(Y_Nor[:,0]), statistics.mean(Y_Nor[:,1]) )

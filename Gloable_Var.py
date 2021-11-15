@@ -1,5 +1,5 @@
-data_p = "D:\Dropbox\Python Program\Forward Interpretor\\test\\"
+data_p = "D:\Jiangy\JY_Python\Fast_forward_generator\Save\\"
 
 
 n_pix = 32
-N_pack = 100
+N_pack = 1000

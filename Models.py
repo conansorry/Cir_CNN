@@ -11,11 +11,24 @@ import keras
 def baseline_model(in_dim, n_out):
     model = Sequential()
     model.add(Dense(in_dim, input_dim= in_dim, activation="sigmoid"))
-    model.add(Dense(0.5*in_dim, activation="sigmoid"))
+    model.add(Dense(2 * in_dim, activation="sigmoid"))
+    model.add(Dense(2 * in_dim, activation="relu"))
+    model.add(Dense(4 * in_dim, activation="sigmoid"))
+    model.add(Dense(4 * in_dim, activation="relu"))
+    model.add(Dense(2 * in_dim, activation="sigmoid"))
+    model.add(Dense(2 * in_dim, activation="relu"))
+    model.add(Dense( in_dim, activation="relu"))
+    model.add(Dense( in_dim, activation="sigmoid"))
+    model.add(Dense(0.5 * in_dim, activation="relu"))
+    model.add(Dense(0.5 * in_dim, activation="sigmoid"))
+    model.add(Dense(0.25 * in_dim, activation="relu"))
+    model.add(Dense(0.125 * in_dim, activation="relu"))
+    model.add(Dense( in_dim /32, activation="relu"))
+    model.add(Dense(in_dim / 128, activation="relu"))
     model.add(LeakyReLU(alpha=0.1))
     model.add(Dense(n_out, activation="sigmoid"))
 
-    opt = keras.optimizers.SGD(learning_rate=0.01, momentum=0.5)
+    opt = keras.optimizers.SGD(learning_rate=0.4, momentum=0.0)
     # losses = keras.losses.mean_absolute_error()
     model.compile(loss="MAE", optimizer=opt )
 
@@ -53,16 +66,16 @@ def CNN_model_2( n_pix, n_out):
 
     model.add(UpSampling2D((2,2), input_shape=(n_pix, n_pix, 1)))
     model.add(ReplicationPadding2D(padding=(2, 2)))
-    model.add(Conv2D(16, (5, 5), activation='sigmoid'))
+    model.add(Conv2D(64, (5, 5), activation='sigmoid'))
     model.add(MaxPooling2D())
     model.add(Dropout(0.2))
 
     model.add(ReplicationPadding2D(padding=(2, 2)))
-    model.add(Conv2D(16, (5, 5), activation='sigmoid'))
+    model.add(Conv2D(64, (5, 5), activation='sigmoid'))
     model.add(MaxPooling2D())
     model.add(Dropout(0.2))
 
-    model.add(Conv2D(32, (3, 3), activation='sigmoid'))
+    model.add(Conv2D(128, (3, 3), activation='sigmoid'))
     model.add(ReplicationPadding2D(padding=(1, 1)))
     model.add(MaxPooling2D())
     model.add(Dropout(0.2))
@@ -74,6 +87,9 @@ def CNN_model_2( n_pix, n_out):
 
     model.add(Flatten())
     model.add(Dense(128, activation='sigmoid'))
+    model.add(Dense(128, activation='sigmoid'))
+    model.add(Dense(64, activation='sigmoid'))
+    model.add(Dense(32, activation='sigmoid'))
     model.add(Dense(n_out, activation='sigmoid'))
     # Compile model
     opt = keras.optimizers.SGD(learning_rate=0.01, momentum=0.5)
