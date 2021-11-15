@@ -8,25 +8,7 @@ from keras.utils import plot_model
 import Gloable_Var
 import Models
 
-def mini_Input(X_Buff):
-    half_num_pixels = int(X_Buff.shape[1] * 0.5 )
-    n_input = int(half_num_pixels * (half_num_pixels + 1) *0.5)
-    X_test = np.zeros((X_Buff.shape[0], n_input))
 
-
-    for i in range(X_Buff.shape[0]):
-        s_ind = 0
-        for j in range(half_num_pixels):
-            X_test[i, s_ind:s_ind + half_num_pixels - j] = X_Buff[i,j,j:half_num_pixels]
-            s_ind += half_num_pixels - j
-    return X_test, n_input
-
-def modi_Y(Y_Buff):
-    Y_test = np.zeros((Y_Buff.shape[0], 1))
-    for i in range(Y_test.shape[0]):
-        Y_test[i] = math.sqrt(Y_Buff[i,0]*Y_Buff[i,1])
-
-    return Y_test, 1
 
 
 
@@ -46,9 +28,9 @@ def CNN_Model():
     L_Max = 0.8 * max(Y_Buff[:, 0])
     C_Max = 0.8 * max(Y_Buff[:, 1])
 
-    Y_Nor = np.zeros(np.shape(Y_Buff))
-    Y_Nor[:, 0] = Y_Buff[:, 0] / L_Max
-    Y_Nor[:, 1] = Y_Buff[:, 1] / C_Max
+    Y_Buff = np.zeros(np.shape(Y_Buff))
+    Y_Buff[:, 0] = Y_Buff[:, 0] / L_Max
+    Y_Buff[:, 1] = Y_Buff[:, 1] / C_Max
 
     X_train, X_test, Y_train, Y_test = train_test_split(X_Buff, Y_Buff, test_size=0.2, random_state=422)
 
@@ -68,7 +50,7 @@ def baseline_model():
 
 
     X_Buff, Y_Buff = Load_data.load_data_with_array(index_Array)
-    X_Buff = Load_data.up_Sampling_Data(X_Buff)
+    # X_Buff = Load_data.up_Sampling_Data(X_Buff)
 
     num_pixels = X_Buff.shape[1]
 
@@ -76,20 +58,20 @@ def baseline_model():
 
     L_Max = 0.8 * max(Y_Buff[:,0])
     C_Max = 0.8 * max(Y_Buff[:,1])
-    Y_Nor = np.zeros(np.shape(Y_Buff))
-    Y_Nor[:, 0] = Y_Buff[:, 0] / L_Max
-    Y_Nor[:, 1] = Y_Buff[:, 1] / C_Max
+
+    Y_Buff[:, 0] = Y_Buff[:, 0] / L_Max
+    Y_Buff[:, 1] = Y_Buff[:, 1] / C_Max
 
 
     # all in line input
-    # n_input = num_pixels * num_pixels
-    # X_Buff = X_Buff.reshape((X_Buff.shape[0], n_input)).astype('float32')
+    n_input = num_pixels * num_pixels
+    X_Buff = X_Buff.reshape((X_Buff.shape[0], n_input)).astype('float32')
     #
     n_out = 2
 
     # 0.125 inpput
-    X_Buff, n_input = mini_Input(X_Buff)
-    # Y_Nor, n_out = modi_Y(Y_Buff)
+    # X_Buff, n_input = Load_data.mini_Input(X_Buff)
+    # Y_Buff, n_out = Load_data.modi_Y(Y_Buff)
     #
     # print( statistics.mean(Y_Nor[:,0]), statistics.mean(Y_Nor[:,1]) )
 

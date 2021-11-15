@@ -2,7 +2,25 @@ import numpy as np
 import Gloable_Var as Var
 
 N_pack = Var.N_pack
+def mini_Input(X_Buff):
+    half_num_pixels = int(X_Buff.shape[1] * 0.5 )
+    n_input = int(half_num_pixels * (half_num_pixels + 1) *0.5)
+    X_test = np.zeros((X_Buff.shape[0], n_input))
 
+
+    for i in range(X_Buff.shape[0]):
+        s_ind = 0
+        for j in range(half_num_pixels):
+            X_test[i, s_ind:s_ind + half_num_pixels - j] = X_Buff[i,j,j:half_num_pixels]
+            s_ind += half_num_pixels - j
+    return X_test, n_input
+
+def modi_Y(Y_Buff):
+    Y_test = np.zeros((Y_Buff.shape[0], 1))
+    for i in range(Y_test.shape[0]):
+        Y_test[i] = math.sqrt(Y_Buff[i,0]*Y_Buff[i,1])
+
+    return Y_test, 1
 def load_data_with_array(index_Array):
     Max = int((index_Array[-1]) / N_pack)
     print(index_Array[-1], N_pack)
