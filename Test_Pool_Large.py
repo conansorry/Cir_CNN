@@ -20,8 +20,8 @@ def plt_his(history, name):
     plt.savefig(name+".png")
     plt.show()
 
-n_max =20000
-name = "test3"
+n_max =5000
+name = "test7"
 
 
 def CNN_Model():
@@ -70,8 +70,8 @@ def baseline_model():
 
 
 
-    L_Max = 0.8 * max(Y_Buff[:,0])
-    C_Max = 0.8 * max(Y_Buff[:,1])
+    L_Max = 1.0 * max(Y_Buff[:,0])
+    C_Max = 1.0 * max(Y_Buff[:,1])
 
     Y_Buff[:, 0] = Y_Buff[:, 0] / L_Max
     Y_Buff[:, 1] = Y_Buff[:, 1] / C_Max
@@ -85,7 +85,7 @@ def baseline_model():
 
     # 0.125 inpput
     # X_Buff, n_input = Load_data.mini_Input(X_Buff)
-    # Y_Buff, n_out = Load_data.modi_Y(Y_Buff)
+    Y_Buff, n_out = Load_data.modi_Y(Y_Buff)
     #
     # print( statistics.mean(Y_Nor[:,0]), statistics.mean(Y_Nor[:,1]) )
 

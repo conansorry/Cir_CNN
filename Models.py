@@ -18,7 +18,7 @@ def baseline_model(in_dim, n_out):
     opt = keras.optimizers.SGD(learning_rate=0.01, momentum=0.5)
     opt_ad = keras.optimizers.Adam()
     # losses = keras.losses.mean_absolute_error()
-    model.compile(loss="MAE", optimizer=opt )
+    model.compile(loss="MAE", optimizer=opt_ad )
 
     return model
 

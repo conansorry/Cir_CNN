@@ -1,16 +1,32 @@
 Test1:
 Shallow DNN with input 32*32 output 2. converged in 200 with normalized MAE in 0.1
-epoch = 200, batch_size =500
+epoch = 200, batch_size =50
 N_data = 5000
-val =0.10, loss = 0.08
+train =0.10, test = 0.08
 
-Test2:
+Test2(revined):
 Smaller data size. N_data = 1000
 epoch = 1000, batch_size=50
-val = 0.12, los = 0.1
+train = 0.12, test = 0.1
 
 
-Test3:
+Test3(revined):
 Large data size. N_data = 20000
 epoch = 200, batch_size=50
-val = 0.10, los = 0.10
+train = 0.10, test = 0.10
+
+test4(update):
+Nor_wt = 1.0(update), train = 0.084, test = 0.084
+
+test5(update):
+SGD->Adam
+Adam converge faster with better test result
+train = 0.001, test = 0.0077 (bench mark now)
+
+test6(revined):
+use minimum X input data
+Influence not march, even worse.
+
+test7():
+use single Y
+if only f are needed , its better
