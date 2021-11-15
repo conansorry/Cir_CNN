@@ -9,13 +9,7 @@ import Gloable_Var
 import Models
 
 def plt_his(history, name):
-    plt.plot(history.history['accuracy'])
-    plt.plot(history.history['val_accuracy'])
-    plt.title('model accuracy')
-    plt.ylabel('accuracy')
-    plt.xlabel('epoch')
-    plt.legend(['train', 'test'], loc='upper left')
-    plt.show()
+
     # summarize history for loss
     plt.plot(history.history['loss'])
     plt.plot(history.history['val_loss'])
@@ -26,7 +20,9 @@ def plt_his(history, name):
     plt.savefig(name+".png")
     plt.show()
 
-n_max =5000
+n_max =20000
+name = "test3"
+
 
 def CNN_Model():
     index_Array = np.loadtxt(Gloable_Var.data_p + "\LC_fit\Good_Index.txt")
@@ -62,7 +58,7 @@ def CNN_Model():
 
 def baseline_model():
 
-    name = "test1"
+
     index_Array = np.loadtxt( Gloable_Var.data_p + "\LC_fit\Good_Index.txt")
     index_Array = index_Array[0:n_max].astype(int)
 
@@ -98,7 +94,7 @@ def baseline_model():
 
     model = Models.baseline_model(n_input, n_out)
     model.summary()
-    history = model.fit(X_train, Y_train, validation_data=(X_test, Y_test), epochs=300, batch_size=50, verbose=2)
+    history = model.fit(X_train, Y_train, validation_data=(X_test, Y_test), epochs=1000, batch_size=50, verbose=2)
     np.save(name, history.history)
     plot_model(model, name + ".png", show_shapes=True)
     plt_his(history,name )

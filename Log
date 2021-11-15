@@ -1,0 +1,16 @@
+Test1:
+Shallow DNN with input 32*32 output 2. converged in 200 with normalized MAE in 0.1
+epoch = 200, batch_size =500
+N_data = 5000
+val =0.10, loss = 0.08
+
+Test2:
+Smaller data size. N_data = 1000
+epoch = 1000, batch_size=50
+val = 0.12, los = 0.1
+
+
+Test3:
+Large data size. N_data = 20000
+epoch = 200, batch_size=50
+val = 0.12, los = 0.1
