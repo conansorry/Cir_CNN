@@ -27,6 +27,10 @@ test6(revined):
 use minimum X input data
 Influence not march, even worse.
 
-test7():
+test7(revined):
 use single Y
 if only f are needed , its better
+
+test8:
+Use CNN model.
+model collapse

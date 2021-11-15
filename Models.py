@@ -42,10 +42,11 @@ def CNN_model_1( n_pix, n_out):
     model.add(Dropout(0.2))
 
     model.add(Flatten())
-    model.add(Dense(128, activation='sigmoid'))
+    model.add(Dense(32, activation='sigmoid'))
     model.add(Dense(n_out, activation='sigmoid'))
     # Compile model
     opt = keras.optimizers.SGD(learning_rate=0.01, momentum=0.5)
+    opt_ad = keras.optimizers.Adam()
     model.compile(loss='MAE', optimizer=opt)
 
     return model
