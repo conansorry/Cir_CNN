@@ -16,10 +16,14 @@ def baseline_model(in_dim, n_out):
     model.add(Dense(n_out, activation="sigmoid"))
 
     opt = keras.optimizers.SGD(learning_rate=0.01, momentum=0.5)
+    opt_ad = keras.optimizers.Adam()
     # losses = keras.losses.mean_absolute_error()
     model.compile(loss="MAE", optimizer=opt )
 
     return model
+
+
+
 
 def CNN_model_1( n_pix, n_out):
     # create model

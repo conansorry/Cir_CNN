@@ -13,4 +13,4 @@ val = 0.12, los = 0.1
 Test3:
 Large data size. N_data = 20000
 epoch = 200, batch_size=50
-val = 0.12, los = 0.1
+val = 0.10, los = 0.10

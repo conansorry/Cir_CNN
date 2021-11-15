@@ -94,7 +94,7 @@ def baseline_model():
 
     model = Models.baseline_model(n_input, n_out)
     model.summary()
-    history = model.fit(X_train, Y_train, validation_data=(X_test, Y_test), epochs=1000, batch_size=50, verbose=2)
+    history = model.fit(X_train, Y_train, validation_data=(X_test, Y_test), epochs=200, batch_size=50, verbose=2)
     np.save(name, history.history)
     plot_model(model, name + ".png", show_shapes=True)
     plt_his(history,name )
